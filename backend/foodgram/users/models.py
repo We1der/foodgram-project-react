@@ -4,15 +4,24 @@ from django.db import models
 
 
 class User(AbstractUser):
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ('username', 'first_name', 'last_name', 'password')
+    email = models.EmailField(
+        max_length=250,
+        unique=True,
+        verbose_name='email',
+    )
     username = models.CharField(
+        blank=False,
         max_length=150,
         unique=True,
-        validators=(RegexValidator(regex=r'^[\w.@+-]+\Z'),)
+        verbose_name='username',
+        validators=(RegexValidator(regex=r'^[\w.@+-]+\Z'),),
     )
-    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.username
 
     class Meta:
-        ordering = ('username',)
+        verbose_name = 'User'
