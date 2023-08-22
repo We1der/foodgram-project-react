@@ -3,10 +3,9 @@ import base64
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from django.core.files.base import ContentFile
-from rest_framework import serializers
-
 from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
                             ShoppingCart, Subscribe, Tag)
+from rest_framework import serializers
 
 User = get_user_model()
 
