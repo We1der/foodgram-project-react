@@ -98,8 +98,6 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker compose -f docker-compose.production.yml down
-            sudo docker pull we1der/foogram_backend
-            sudo docker pull we1der/foogram_frontend
             sudo docker compose -f docker-compose.production.yml up -d
   # Отправка сообщения в телеграм
   send_message:
