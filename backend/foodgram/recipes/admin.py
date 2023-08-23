@@ -41,5 +41,5 @@ class ShoppingCartAdmin(admin.ModelAdmin):
 
 
 @admin.register(Subscribe)
-class ShoppingCartAdmin(admin.ModelAdmin):
+class SubscribeAdmin(admin.ModelAdmin):
     list_display = ('user', 'author',)
