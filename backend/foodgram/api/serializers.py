@@ -2,6 +2,7 @@ import base64
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
                             ShoppingCart, Subscribe, Tag)
@@ -68,7 +69,7 @@ class SetPasswordSerializer(serializers.Serializer):
         new_password = data.get('new_password')
         try:
             validate_password(new_password)
-        except Exception as validate_error:
+        except ValidationError as validate_error:
             raise serializers.ValidationError(list(validate_error))
         return data
 
@@ -200,7 +201,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        print('--->', validated_data, '<---')
         ingredients = validated_data.pop('ingredients')
         instance = super().create(validated_data)
         self.add_tags_and_ingredients(
