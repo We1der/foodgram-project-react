@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         def create_objects_from_csv(file_path, create_func):
-            with open(file_path, 'r') as csv_file:
+            with open(file_path, 'r', encoding='utf-8') as csv_file:
                 reader = csv.reader(csv_file)
                 for row in reader:
                     create_func(*row)
