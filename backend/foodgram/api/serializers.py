@@ -119,7 +119,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     ingredients = RecipeIngredientSerializer(
         many=True,
-        source='recipeingredient_set',
+        source='recipe',
         read_only=True,
     )
     is_in_shopping_cart = serializers.SerializerMethodField()
