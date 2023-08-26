@@ -81,7 +81,8 @@ class CustomUserViewSet(UserViewSet, AddOrDelMixin):
             obj=author,
             request=request,
             serializer=SubscriptionsSerializer,
-            args={'user': request.user, 'author': author},
+            user=request.user,
+            author=author
         )
 
 
@@ -120,7 +121,8 @@ class RecipeViewSet(ModelViewSet, AddOrDelMixin):
             obj=recipe,
             request=request,
             serializer=RecipeShortSerializer,
-            args={'user': request.user, 'recipe': recipe},
+            user=request.user,
+            recipe=recipe,
         )
 
     @action(
@@ -163,7 +165,8 @@ class RecipeViewSet(ModelViewSet, AddOrDelMixin):
             obj=recipe,
             request=request,
             serializer=RecipeShortSerializer,
-            args={'user': request.user, 'recipe': recipe},
+            user=request.user,
+            recipe=recipe,
         )
 
 

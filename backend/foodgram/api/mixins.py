@@ -6,16 +6,16 @@ class AddOrDelMixin:
     serializer_class = None
     model_class = None
 
-    def add_or_delete_object(self, model, obj, request, serializer, args):
+    def add_or_delete_object(self, model, obj, request, serializer, **kwargs):
         if request.method == 'DELETE':
-            model.objects.filter(**args).delete()
+            model.objects.filter(**kwargs).delete()
             return Response(
                 {'detail': 'Удалено'},
                 status=status.HTTP_204_NO_CONTENT,
             )
 
-        if not model.objects.filter(**args).exists():
-            model.objects.create(**args)
+        if not model.objects.filter(**kwargs).exists():
+            model.objects.create(**kwargs)
             response_data = serializer(
                 obj,
                 context={'request': request},

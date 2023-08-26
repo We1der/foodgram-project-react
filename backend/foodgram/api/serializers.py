@@ -36,6 +36,8 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
     def get_is_subscribed(self, obj):
+        if self.context.get('request').user.is_anonymous:
+            return False
         is_sub = Subscribe.objects.filter(
             user=self.context.get('request').user,
             author=obj,
@@ -142,6 +144,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
+        if request.user.is_anonymous:
+            return False
         is_fav = Favorite.objects.filter(
             user=request.user,
             recipe=obj,
@@ -150,6 +154,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_is_in_shopping_cart(self, obj):
         request = self.context.get('request')
+        if request.user.is_anonymous:
+            return False
         is_in_cart = ShoppingCart.objects.filter(
             user=request.user,
             recipe=obj,
